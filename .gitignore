@@ -1,0 +1,43 @@
+# Python artifacts
+__pycache__/
+*.py[cod]
+*.so
+*.egg
+*.egg-info/
+
+# Virtual environments
+.venv/
+venv/
+env/
+
+# Distribution / packaging
+build/
+dist/
+
+# Logs and coverage
+*.log
+*.coverage
+htmlcov/
+
+# IDE / Editor settings
+.vscode/
+.idea/
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# Environment variables
+.env
+*.env
+
+# Chainlit generated files
+.chainlit/
+chainlit.mdt
+
+# Node (if front-end added later)
+node_modules/
+
+# Databases / cache
+db.sqlite
+*.db

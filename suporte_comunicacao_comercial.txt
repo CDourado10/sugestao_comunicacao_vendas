@@ -1,0 +1,118 @@
+Projeto: Sistema Inteligente de Suporte à Comunicação Comercial via WhatsApp
+1. Visão Geral
+Este projeto tem como objetivo criar um sistema inteligente que auxilie vendedores no relacionamento com seus clientes via WhatsApp, oferecendo sugestões personalizadas baseadas no histórico de interações anteriores. O sistema é composto por um pipeline de coleta, análise e apresentação de dados, com foco na personalização do atendimento e aumento das conversões.
+
+2. Objetivos
+Coletar e organizar dados de conversas (texto, áudio, arquivos) oriundos do WhatsApp.
+
+Analisar o histórico de interações para identificar padrões comportamentais, preferências e estilo de comunicação do cliente.
+
+Gerar sugestões de abordagem para o vendedor, como:
+
+Tom de voz ideal (mais formal, descontraído, direto ao ponto etc.)
+
+Produtos ou serviços de maior interesse
+
+Temas previamente abordados
+
+Momento oportuno para retomar contato
+
+Fornecer essas sugestões por meio de uma interface simples e interativa, desenvolvida com ChainLit.
+
+3. Arquitetura do Sistema
+3.1. Coleta de Dados
+Fonte: API do WhatsApp (por meio do WhatsApp Business API ou plataforma intermediária como Twilio ou Z-API).
+
+Tipos de dados coletados:
+
+Texto: mensagens escritas entre cliente e vendedor.
+
+Áudio: mensagens de voz transcritas automaticamente.
+
+Arquivos: documentos como PDFs ou imagens enviados pelo cliente.
+
+3.2. Armazenamento
+Banco de dados estruturado contendo:
+
+Identificação única do cliente.
+
+Timestamps e conteúdos das mensagens.
+
+Metadados (ex: se o cliente visualizou, respondeu, tempo de resposta etc.).
+
+Histórico de compras e interações anteriores (quando disponível).
+
+3.3. Análise de Dados
+Pipeline de processamento inclui:
+
+Pré-processamento de texto (tokenização, remoção de stopwords, vetorização).
+
+Análise de sentimento (positivo, neutro, negativo).
+
+Classificação de intenções (pergunta, dúvida, interesse, objeção, encerramento).
+
+Geração de perfil do cliente com base em linguagem, horários de contato, tópicos de interesse etc.
+
+Transcrição de áudio via modelo de ASR (como Whisper).
+
+Análise semântica de documentos compartilhados.
+
+3.4. Geração de Sugestões
+Modelo de IA (pode ser um LLM como GPT) com contexto do cliente é chamado para gerar:
+
+Uma resposta ou recomendação de abordagem.
+
+Resumo da última conversa.
+
+Pontos de atenção (ex: cliente reclamou de algo anteriormente).
+
+Insights de follow-up.
+
+4. Interface com o Vendedor (ChainLit)
+Interface leve e interativa.
+
+Entrada: identificação do cliente ou abertura de novo chat.
+
+Saída:
+
+Perfil resumido do cliente.
+
+Sugestão de abordagem (ex: "Você pode responder com algo como...").
+
+Possibilidade de ajustar a sugestão antes de enviá-la.
+
+Histórico recente com destaques relevantes.
+
+5. Fluxo Geral
+plaintext
+Copiar
+Editar
+WhatsApp → API → Banco de Dados → Análise → Sugestões → Interface ChainLit → Vendedor
+6. Casos de Uso
+Onboarding de novo lead: o sistema sugere um primeiro contato personalizado com base no canal de origem e palavras-chave.
+
+Retomada de conversa antiga: o sistema oferece um resumo rápido e sugere reabertura suave do diálogo.
+
+Negociação em andamento: o sistema detecta travas e sugere argumentos baseados em histórico ou dados de outros clientes similares.
+
+7. Tecnologias Utilizadas (sugestão)
+Coleta: WhatsApp Business API, Z-API ou Twilio.
+
+Transcrição de áudio: OpenAI Whisper ou Google Speech-to-Text.
+
+Análise: Python (Pandas, Scikit-learn, spaCy, Transformers).
+
+Armazenamento: PostgreSQL ou MongoDB.
+
+Interface: ChainLit (Python + Streamlit-like).
+
+Orquestração/Backend: FastAPI.
+
+8. Futuras Expansões
+Treinamento de modelos customizados com dados internos.
+
+Integração com CRM.
+
+Dashboard de métricas de desempenho de vendas por abordagem usada.
+
+Feedback loop: o vendedor avalia a sugestão da IA e o sistema aprende.
